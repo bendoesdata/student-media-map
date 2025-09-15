@@ -45,8 +45,13 @@ export default {
       }).addTo(this.map);
     },
     fetchDataAndAddMarkers() {
+      // fp for local dev
+      // let fp = 'https://bendoesdata.github.io/student-media-map/outlets.csv';
+      // fp for prod dev
+      let fp = '/student-media-map/outlets.csv';
+
       // Fetch the local CSV file
-      fetch('/outlets.csv')
+      fetch(fp)
         .then(response => response.text())
         .then(csvText => {
           // Parse the CSV data
