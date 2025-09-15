@@ -43,7 +43,6 @@ export default {
       maxZoom: 19,
       attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(this.map);
-    }
     },
     fetchDataAndAddMarkers() {
       // Fetch the local CSV file
@@ -101,6 +100,7 @@ export default {
       });
     }
   }
+};
 </script>
 
 <style>
