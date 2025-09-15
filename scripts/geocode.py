@@ -96,7 +96,7 @@ def main():
         creds = json.loads(credentials_json)
         # Initial authentication check as before
         print("Attempting to authenticate with Google Sheets...")
-        gc = gspread.service_account(filename=creds)
+        gc = gspread.service_account(filename='GOOGLE_CREDENTIALS')
         print("Successfully authenticated with Google Sheets.")
 
         gmaps = googlemaps.Client(key=GOOGLE_MAPS_API_KEY)
