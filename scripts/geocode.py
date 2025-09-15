@@ -18,13 +18,18 @@ CSV_OUTPUT_PATH = 'public/outlets.csv'
 
 # --- Setup ---
 try:
-    # Load credentials from the local JSON file
-    if not os.path.exists(GOOGLE_CREDENTIALS):
-        raise FileNotFoundError(f"Credentials file not found at: {GOOGLE_CREDENTIALS}")
+    # This is the crucial line: accessing the environment variable
+    credentials_json = os.environ.get('GOOGLE_CREDENTIALS') 
+    if not credentials_json:
+        raise ValueError("GOOGLE_CREDENTIALS environment variable not set.")
+    
+    creds = json.loads(credentials_json)
+    gc = gspread.service_account_from_dict(creds)
 
-    print("Attempting to authenticate with Google Sheets...")
-    gc = gspread.service_account(filename=CREDENTIALS_FILE)
-    print("Successfully authenticated with Google Sheets.")
+    # this was for local testing, not GH action
+    # print("Attempting to authenticate with Google Sheets...")
+    # gc = gspread.service_account(filename=CREDENTIALS_FILE)
+    # print("Successfully authenticated with Google Sheets.")
 
     # Authenticate with Google Maps Geocoding API
     gmaps = googlemaps.Client(key=GOOGLE_MAPS_API_KEY)
