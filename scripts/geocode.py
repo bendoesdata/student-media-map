@@ -88,9 +88,15 @@ def geocode_university(university_name):
 def main():
     """Main function to pull, geocode, and save data."""
     try:
+        # This is the crucial line: accessing the environment variable
+        credentials_json = os.environ.get('GOOGLE_CREDENTIALS') 
+        if not credentials_json:
+            raise ValueError("GOOGLE_CREDENTIALS environment variable not set.")
+        
+        creds = json.loads(credentials_json)
         # Initial authentication check as before
         print("Attempting to authenticate with Google Sheets...")
-        gc = gspread.service_account(filename=CREDENTIALS_FILE)
+        gc = gspread.service_account(filename=creds)
         print("Successfully authenticated with Google Sheets.")
 
         gmaps = googlemaps.Client(key=GOOGLE_MAPS_API_KEY)
