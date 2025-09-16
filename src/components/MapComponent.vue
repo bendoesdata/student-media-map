@@ -1,7 +1,7 @@
 <template>
   <div id="map-wrapper">
     <div id="sidebar">
-      <p>Select a marker to learn more about each student media outlet.</p>
+      <p style="font-style: italic; font-size: 14px">Select a marker to learn more about each student media outlet.</p>
       <hr>
       <div v-if="selectedOutlet">
         <h3> {{ selectedOutlet['Name of Outlet'] }}</h3>
@@ -24,14 +24,33 @@ import Papa from 'papaparse';
 
 export default {
   name: 'MapComponent',
+  props: {
+    selectedCollege: {
+      type: String,
+      default: ''
+    }
+  },
   data() {
     return {
-      selectedOutlet: null
+      selectedOutlet: null,
+      outletsData: []
     };
   },
   mounted() {
     this.initMap();
     this.fetchDataAndAddMarkers();
+  },
+  watch: {
+    selectedCollege(newCollege) {
+      if (newCollege && this.outletsData.length) {
+        // Find the first outlet with matching college name
+        const outlet = this.outletsData.find(o => o['College/University'] === newCollege);
+        if (outlet && !isNaN(parseFloat(outlet.LAT)) && !isNaN(parseFloat(outlet.LONG))) {
+          this.map.setView([parseFloat(outlet.LAT), parseFloat(outlet.LONG)], 12, { animate: true });
+          this.selectedOutlet = outlet;
+        }
+      }
+    }
   },
   methods: {
     initMap() {
@@ -39,16 +58,16 @@ export default {
       this.map = L.map('map').setView([39.8283, -98.5795], 4);
 
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      minZoom: 0,
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        minZoom: 0,
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       }).addTo(this.map);
     },
     fetchDataAndAddMarkers() {
       // fp for local dev
-      let fp = 'https://bendoesdata.github.io/student-media-map/outlets.csv';
+      // let fp = 'https://bendoesdata.github.io/student-media-map/outlets.csv';
       // fp for prod dev
-      // let fp = '/student-media-map/outlets.csv';
+      let fp = '/student-media-map/outlets.csv';
 
       // Fetch the local CSV file
       fetch(fp)
@@ -58,6 +77,7 @@ export default {
           Papa.parse(csvText, {
             header: true,
             complete: (results) => {
+              this.outletsData = results.data;
               this.addMarkers(results.data);
             }
           });

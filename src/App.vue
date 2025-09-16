@@ -4,29 +4,38 @@
     <h1>Explore the {{ totalNumOutlets }} Student Media Outlets Across the U.S.</h1>
     <p>Use the map below to discover various student media outlets located at colleges and universities nationwide. Click on the markers to learn more about each outlet and visit their websites.</p>
     </div>
-    <MapComponent />
+  <OutletSearchBar @college-selected="handleCollegeSelected" />
+  <MapComponent :selectedCollege="selectedCollege" />
     </div>
 </template>
 
 <script>
 import MapComponent from './components/MapComponent.vue';
 import Papa from 'papaparse';
+import OutletSearchBar from './components/OutletSearchBar.vue';
 
 export default {
   name: 'App',
   components: {
     MapComponent,
+    OutletSearchBar
   },
   data() {
     return {
-      totalNumOutlets: 0
+      totalNumOutlets: 0,
+      selectedCollege: ''
     };
+  },
+  methods: {
+    handleCollegeSelected(college) {
+      this.selectedCollege = college;
+    }
   },
   mounted() {
     // fp for local dev
-      // let fp = 'https://bendoesdata.github.io/student-media-map/outlets.csv';
-      // fp for prod dev
-      let fp = '/student-media-map/outlets.csv';
+    let fp = 'https://bendoesdata.github.io/student-media-map/outlets.csv';
+    // fp for prod dev
+    // let fp = '/student-media-map/outlets.csv';
 
     // load the csv file to get the total number of outlets
     fetch(fp)
