@@ -89,9 +89,8 @@ export default {
 
           // Create the popup content
           const popupContent = `
-            <h3>${outlet['College/University']}</h3>
-            <p><strong>Outlet:</strong> ${outlet['Name of Outlet']}</p>
-            <p><a href="${outlet['URL of Outlet']}" target="_blank">Visit Website</a></p>
+            <h3>${outlet['Name of Outlet']}</h3>
+            <p>${outlet['College/University']}</p>
           `;
 
           // Bind the popup to the marker
@@ -111,7 +110,7 @@ export default {
 <style>
 #map {
   height: 100vh; /* Make the map fill the entire screen height */
-  width: 90%;
+  width: 66%;
   margin: 0 10px;
   box-sizing: border-box;
 
@@ -121,7 +120,7 @@ export default {
   display: flex;
 }
 #sidebar {
-  width: 25%;
+  width: 33%;
   padding: 20px;
   box-sizing: border-box;
   background-color: #f9f9f9;
