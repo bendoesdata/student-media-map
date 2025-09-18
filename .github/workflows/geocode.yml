@@ -32,10 +32,14 @@ jobs:
         run: |
           python scripts/geocode.py
 
-      - name: Commit and push updated CSV
+      - name: Commit and push updated CSV if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/outlets.csv
-          git commit -m "Automated: Update geocoded student outlets CSV"
-          git push
+          if ! git diff --cached --quiet; then
+            git commit -m "Automated: Update geocoded student outlets CSV"
+            git push
+          else
+            echo "No changes to public/outlets.csv. Skipping commit and push."
+          fi

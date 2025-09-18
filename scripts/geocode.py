@@ -133,16 +133,48 @@ def main():
         # Now, you can perform the geocoding logic
         print(f"Found {len(df)} records in the spreadsheet.")
 
+        # Load existing outlets.csv to check for cached LAT/LONG
+        import csv
+        cached_coords = {}
+        try:
+            with open(CSV_OUTPUT_PATH, newline='', encoding='utf-8') as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    college = row.get('College/University')
+                    lat = row.get('LAT')
+                    lon = row.get('LONG')
+                    if college and lat and lon:
+                        try:
+                            lat_val = float(lat)
+                            lon_val = float(lon)
+                            cached_coords[college] = (lat_val, lon_val)
+                        except ValueError:
+                            pass
+        except FileNotFoundError:
+            print(f"No existing {CSV_OUTPUT_PATH} found. All geocoding will be attempted.")
+
         for index, row in df.iterrows():
-            if not row.get('LAT') or not row.get('LONG'):
-                university = row.get('College/University')
-                if university:
-                    print(f"Geocoding: {university}")
-                    lat, lon = geocode_university(university)
-                    if lat and lon:
-                        df.at[index, 'LAT'] = lat
-                        df.at[index, 'LONG'] = lon
-                        print(f"  -> Found coordinates: {lat}, {lon}")
+            lat_val = row.get('LAT')
+            lon_val = row.get('LONG')
+            university = row.get('College/University')
+            # Check if already present in sheet
+            has_lat = lat_val not in [None, '', 'null']
+            has_lon = lon_val not in [None, '', 'null']
+            # Check if cached in outlets.csv
+            cached = cached_coords.get(university)
+            if has_lat and has_lon:
+                continue  # Already present, skip geocoding
+            elif cached:
+                df.at[index, 'LAT'] = cached[0]
+                df.at[index, 'LONG'] = cached[1]
+                print(f"  -> Used cached coordinates for {university}: {cached[0]}, {cached[1]}")
+            elif university:
+                print(f"Geocoding: {university}")
+                lat, lon = geocode_university(university)
+                if lat and lon:
+                    df.at[index, 'LAT'] = lat
+                    df.at[index, 'LONG'] = lon
+                    print(f"  -> Found coordinates: {lat}, {lon}")
 
         # Write the updated data back to the Google Sheet
         worksheet.clear()
