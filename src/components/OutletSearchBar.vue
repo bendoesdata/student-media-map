@@ -75,6 +75,7 @@ export default {
   width: 100%;
   max-width: 400px;
   margin: 20px auto;
+  z-index: 999;
 }
 input {
   width: 100%;
