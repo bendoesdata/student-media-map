@@ -7,10 +7,6 @@
         <h3> {{ selectedOutlet['Name of Outlet'] }}</h3>
         <p><strong>Website:</strong> <a :href="selectedOutlet['URL of Outlet']" target="_blank">{{ selectedOutlet['URL of Outlet'] }}</a></p>
         <p><strong>Contact page:</strong> <a :href="selectedOutlet['Contact page']" target="_blank">{{ selectedOutlet['Contact page'] }}</a></p>
-        <p><strong>Editor/Contact:</strong> {{ selectedOutlet['Editor/Contact'] }}</p>
-        <p><strong>Title:</strong> {{ selectedOutlet['Title'] }}</p>
-        <p><strong>Editor/General email:</strong> {{ selectedOutlet['Editor/General email'] }}</p>
-        <p><strong>Adviser/Pro staff:</strong> {{ selectedOutlet['Adviser/Pro staff'] }}</p>
       </div>
     </div>
     <div id="map"></div>
