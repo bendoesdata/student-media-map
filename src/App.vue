@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="intro">
-    <h1>Explore the {{ totalNumOutlets }} Student Media Outlets Across the U.S.</h1>
+    <h1>Explore the {{ totalNumOutlets }} Student Newspapers Across the U.S.</h1>
     <p>Use the map below to discover various student media outlets located at colleges and universities nationwide. Click on the markers to learn more about each outlet and visit their websites.</p>
     <p>Do you have a student media outlet to add to the map? Fill out <a href="#">this form</a>.</p>
     </div>
