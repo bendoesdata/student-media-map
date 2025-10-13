@@ -37,7 +37,7 @@ export default {
     // fp for local dev
     let fp = 'https://bendoesdata.github.io/student-media-map/outlets.csv';
     // fp for prod dev
-    // let fp = '/student-media-map/outlets.csv';
+    // let fp = '/outlets.csv';
 
     // load the csv file to get the total number of outlets
     fetch(fp)

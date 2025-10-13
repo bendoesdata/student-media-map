@@ -34,9 +34,9 @@ export default {
     loadColleges() {
 
         // fp for local dev
-      let fp = 'https://bendoesdata.github.io/student-media-map/outlets.csv';
+      let fp = '/outlets.csv';
       // fp for prod dev
-    //   let fp = '/student-media-map/outlets.csv';
+    //   let fp = '/outlets.csv';
 
       fetch(fp)
         .then(response => response.text())
