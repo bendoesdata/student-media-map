@@ -1,11 +1,12 @@
 <template>
   <div id="app">
-    <div class="intro">
     <h1>Explore the {{ totalNumOutlets }} Student Newspapers Across the U.S.</h1>
-    <p>Use the map below to discover our continuously updated list of student newspapers at colleges and universities nationwide. Click on the markers to learn more about each outlet and visit their websites.</p>
+    <div class="intro">
+    <p>Use the map below to discover our continuously updated list of student newspapers at colleges and universities nationwide. Click on the markers to learn about each outlet and visit their websites.</p>
     <p>To add your student newspaper to the map, fill out this short form.</p>
     <p>To report an error within this map, please email Barbara Allen at bob@collegejournalism.org.</p> 
     </div>
+    <br></br>
   <OutletSearchBar @college-selected="handleCollegeSelected" />
   <MapComponent :selectedCollege="selectedCollege" />
     </div>
@@ -70,13 +71,33 @@ export default {
   overflow: hidden; /* Prevent scrolling */
 }
 
+p {
+  font-size: 1.2rem;
+  line-height: 1.2;
+  margin: 20px 0;
+}
+
 .intro {
-  max-width: 750px;
-  text-align: center;
-  margin: 0 auto 20px;
+  max-width: 580px;
+  text-align: left;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  padding: 0px
 }
 
 h1 {
-  font-size: 1.5rem
+  font-size: 2rem;
+  text-align: center;;
+  margin-bottom: 20px
+}
+
+@media (max-width: 600px) {
+.intro {
+  padding: 8px
+}
+
+h1 {
+  font-size: 1.6rem;
+}
 }
 </style>
