@@ -3,7 +3,7 @@
     <h1>Explore the {{ totalNumOutlets }} Student Newspapers Across the U.S.</h1>
     <div class="intro">
     <p>Use the map below to discover our continuously updated list of student newspapers at colleges and universities nationwide. Click on the markers to learn about each outlet and visit their websites.</p>
-    <p>To add your student newspaper to the map, fill out this short form.</p>
+    <p>To add your student newspaper to the map, fill out <a href="https://forms.gle/B3Wuwd5bxRvzWtc79">this short form</a>.</p>
     <p>To report an error within this map, please email Barbara Allen at bob@collegejournalism.org.</p> 
     </div>
     <br></br>
@@ -69,6 +69,15 @@ export default {
   width: 100%;
   text-align: center;
   overflow: hidden; /* Prevent scrolling */
+}
+
+a {
+  text-decoration: underline;
+  color: rgb(0, 75, 144);
+}
+
+a:hover {
+  color: rgb(0, 50, 100);
 }
 
 p {
