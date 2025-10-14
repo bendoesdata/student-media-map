@@ -4,7 +4,8 @@
       <p style="font-style: italic; font-size: 14px">Select a marker to learn more about each student media outlet.</p>
       <hr>
       <div v-if="selectedOutlet">
-        <h3> {{ selectedOutlet['Name of Outlet'] }}</h3>
+        <h2> {{ selectedOutlet['Name of Outlet'] }}</h2>
+        <p style="font-size: 1.2rem">{{ selectedOutlet['College/University'] }}</p>
         <p><strong>Website:</strong> <a :href="selectedOutlet['URL of Outlet']" target="_blank">{{ selectedOutlet['URL of Outlet'] }}</a></p>
         <p><strong>Contact page:</strong> <a :href="selectedOutlet['Contact page']" target="_blank">{{ selectedOutlet['Contact page'] }}</a></p>
       </div>
@@ -86,7 +87,7 @@ export default {
       // Define a smaller icon for the markers
       const smallIcon = L.icon({
         iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-        iconSize: [15, 24], // default is [25, 41]
+        iconSize: [18, 26], // default is [25, 41]
         iconAnchor: [10, 32], // default is [12, 41]
         popupAnchor: [1, -32], // default is [1, -34]
         shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
@@ -105,7 +106,7 @@ export default {
 
           // Create the popup content
           const popupContent = `
-            <h3>${outlet['Name of Outlet']}</h3>
+            <h2>${outlet['Name of Outlet']}</h2>
             <p>${outlet['College/University']}</p>
           `;
 
