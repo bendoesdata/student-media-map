@@ -86,7 +86,7 @@ export default {
       // Define a smaller icon for the markers
       const smallIcon = L.icon({
         iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-        iconSize: [20, 32], // default is [25, 41]
+        iconSize: [15, 24], // default is [25, 41]
         iconAnchor: [10, 32], // default is [12, 41]
         popupAnchor: [1, -32], // default is [1, -34]
         shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
